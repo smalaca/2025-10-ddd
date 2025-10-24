@@ -7,15 +7,18 @@ import com.smalaca.opentrainingsales.domain.training.TrainerId;
 import com.smalaca.opentrainingsales.domain.training.Training;
 import com.smalaca.opentrainingsales.domain.training.TrainingCode;
 import com.smalaca.opentrainingsales.domain.training.TrainingDefinitionId;
+import com.smalaca.opentrainingsales.domain.training.TrainingFactory;
 import com.smalaca.opentrainingsales.domain.training.TrainingRepository;
 
 import java.util.UUID;
 
 public class TrainingApplicationService {
     private final TrainingRepository trainingRepository;
+    private final TrainingFactory trainingFactory;
 
-    public TrainingApplicationService(TrainingRepository trainingRepository) {
+    public TrainingApplicationService(TrainingRepository trainingRepository, TrainingFactory trainingFactory) {
         this.trainingRepository = trainingRepository;
+        this.trainingFactory = trainingFactory;
     }
 
     public UUID addTraining(AddNewTrainingCommand command) {
@@ -25,9 +28,9 @@ public class TrainingApplicationService {
         Period period = Period.between(command.startDate(), command.endDate());
         Price price = Price.from(command.price());
         AddNewTrainingDomainCommand domainCommand = new AddNewTrainingDomainCommand(
-                trainerId, trainingDefinitionId, trainingCode, period, price);
+                trainerId, trainingDefinitionId, trainingCode, period, price, command.minimalAttendees(), command.maximalAttendees());
 
-        Training training = new Training(domainCommand);
+        Training training = trainingFactory.create(domainCommand);
 
         return trainingRepository.save(training);
     }

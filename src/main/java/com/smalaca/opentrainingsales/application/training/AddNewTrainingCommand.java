@@ -6,6 +6,7 @@ import java.util.UUID;
 
 public record AddNewTrainingCommand(
         UUID trainingDefinitionId, UUID trainerId, String trainingCode,
-        BigDecimal price, LocalDate startDate, LocalDate endDate) {
+        BigDecimal price, LocalDate startDate, LocalDate endDate,
+        int minimalAttendees, int maximalAttendees) {
 }
 
