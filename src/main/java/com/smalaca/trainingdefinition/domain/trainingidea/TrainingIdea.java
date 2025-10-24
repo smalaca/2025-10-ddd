@@ -18,9 +18,9 @@ public class TrainingIdea {
     }
 
     // Factory
-    public static TrainingIdea create(String name, String description, Category category, TrainerId trainerId) {
-        TrainingIdeaNumber trainingIdeaNumber = TrainingIdeaNumber.from(trainerId);
+    public static TrainingIdea create(CreateTrainingIdeaDomainCommand command) {
+        TrainingIdeaNumber trainingIdeaNumber = TrainingIdeaNumber.from(command.trainerId());
 
-        return new TrainingIdea(name, description, category, trainerId, trainingIdeaNumber);
+        return new TrainingIdea(command.name(), command.description(), command.category(), command.trainerId(), trainingIdeaNumber);
     }
 }

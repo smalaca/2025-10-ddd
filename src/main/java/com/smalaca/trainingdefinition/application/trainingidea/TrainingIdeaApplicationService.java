@@ -1,6 +1,7 @@
 package com.smalaca.trainingdefinition.application.trainingidea;
 
 import com.smalaca.trainingdefinition.domain.trainingidea.Category;
+import com.smalaca.trainingdefinition.domain.trainingidea.CreateTrainingIdeaDomainCommand;
 import com.smalaca.trainingdefinition.domain.trainingidea.TrainerId;
 import com.smalaca.trainingdefinition.domain.trainingidea.TrainingIdea;
 import com.smalaca.trainingdefinition.domain.trainingidea.TrainingIdeaRepository;
@@ -16,15 +17,15 @@ public class TrainingIdeaApplicationService {
     }
 
     @Transactional
-    public UUID propose(String name, String description, String category, UUID trainerId) {
+    public UUID propose(CreateTrainingIdeaCommand command) {
         // 0-* - tłumaczenie języka:
         // - typy proste na value object
         // - identyfikatory na agregaty
-        TrainerId trainerIdVO = new TrainerId(trainerId);
-        Category categoryVO = Category.from(category);
+        CreateTrainingIdeaDomainCommand domainCommand = new CreateTrainingIdeaDomainCommand(
+                command.name(), command.description(), Category.from(command.category()), new TrainerId(command.trainerId()));
 
-        // 1 - wykonanie operacji biznesowej 
-        TrainingIdea trainerIdea = TrainingIdea.create(name, description, categoryVO, trainerIdVO);
+        // 1 - wykonanie operacji biznesowej
+        TrainingIdea trainerIdea = TrainingIdea.create(domainCommand);
 
         // 1-* - zapis danych (zapis do warstwy persystencji albo/i opublikowanie zdarzeń)
         return trainingIdeaRepository.save(trainerIdea);
