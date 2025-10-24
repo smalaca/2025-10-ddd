@@ -6,27 +6,31 @@ import com.smalaca.trainingdefinition.domain.trainingproposition.TrainingProposi
 
 // aggregate root
 public class TrainingDraft {
+    private TrainingDraftId trainingDraftId;
     private final TrainingPropositionId trainingPropositionId;
+    private final TrainerId trainerId;
+    private final TrainingDraftNumber trainingDraftNumber;
     private final String name;
     private final String description;
     private final Category category;
-    private final TrainerId trainerId;
-    private TrainingDraftId trainingDraftId;
     private Price price;
     private int trainingDays;
 
-    private TrainingDraft(TrainingPropositionId trainingPropositionId, String name, String description, Category category, TrainerId trainerId) {
+    private TrainingDraft(
+            TrainingPropositionId trainingPropositionId, TrainerId trainerId, TrainingDraftNumber trainingDraftNumber,
+            String name, String description, Category category) {
         this.trainingPropositionId = trainingPropositionId;
+        this.trainerId = trainerId;
+        this.trainingDraftNumber = trainingDraftNumber;
         this.name = name;
         this.description = description;
         this.category = category;
-        this.trainerId = trainerId;
     }
 
     // factory
     public static TrainingDraft create(TrainingPropositionId trainingPropositionId, String name, String description, Category category, TrainerId trainerId) {
-        // generate TrainingDraftCode
-        return new TrainingDraft(trainingPropositionId, name, description, category, trainerId);
+        TrainingDraftNumber trainingDraftNumber = TrainingDraftNumber.from(trainerId);
+        return new TrainingDraft(trainingPropositionId, trainerId, trainingDraftNumber, name, description, category);
     }
 
     public void update(Price price, int trainingDays) {
