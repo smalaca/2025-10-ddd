@@ -1,13 +1,16 @@
 package com.smalaca.opentrainingsales.domain.training;
 
+import com.smalaca.opentrainingsales.domain.trainerscatalogue.TrainersCatalogue;
 import com.smalaca.opentrainingsales.domain.trainingsdefinitions.TrainingsDefinitions;
 
 // factory
 public class TrainingFactory {
     private final TrainingsDefinitions trainingsDefinitions;
+    private final TrainersCatalogue trainersCatalogue;
 
-    TrainingFactory(TrainingsDefinitions trainingsDefinitions) {
+    TrainingFactory(TrainingsDefinitions trainingsDefinitions, TrainersCatalogue trainersCatalogue) {
         this.trainingsDefinitions = trainingsDefinitions;
+        this.trainersCatalogue = trainersCatalogue;
     }
 
     public Training create(AddNewTrainingDomainCommand command) {
@@ -25,6 +28,10 @@ public class TrainingFactory {
 
         if (trainingsDefinitions.doesNotExist(command.trainingDefinitionId())) {
             throw new IllegalArgumentException("TrainingDefinitionId: " + command.trainingDefinitionId() + " does not exist");
+        }
+
+        if (trainersCatalogue.canConductTraining(command.trainerId(), command.trainingDefinitionId())) {
+            throw new IllegalArgumentException("TrainerId: " + command.trainerId() + " cannot conduct TrainingDefinitionId: " + command.trainingDefinitionId());
         }
 
         return new Training(command);
