@@ -23,7 +23,7 @@ public class TrainingApplicationService {
         TrainerId trainerId = new TrainerId(command.trainerId());
         TrainingCode trainingCode = new TrainingCode(command.trainingCode());
         Period period = new Period(command.startDate(), command.endDate());
-        Price price = new Price(command.price());
+        Price price = Price.from(command.price());
         AddNewTrainingDomainCommand domainCommand = new AddNewTrainingDomainCommand(
                 trainerId, trainingDefinitionId, trainingCode, period, price);
 
