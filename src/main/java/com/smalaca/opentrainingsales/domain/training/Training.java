@@ -1,6 +1,7 @@
 package com.smalaca.opentrainingsales.domain.training;
 
 import com.smalaca.opentrainingsales.domain.trainingid.TrainingId;
+import com.smalaca.opentrainingsales.domain.trainingoffer.TrainingOffer;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,11 +32,12 @@ public class Training {
         return trainingId;
     }
 
-    public void register(ParticipantId participantId) {
+    public TrainingOffer register(ParticipantId participantId) {
         if (participants.size() >= maximalAttendees) {
             throw new IllegalArgumentException("Training is full. " + participantId + " cannot join.");
         }
 
         participants.add(participantId);
+        return TrainingOffer.create(trainingId, price);
     }
 }

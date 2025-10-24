@@ -7,6 +7,8 @@ import com.smalaca.opentrainingsales.domain.training.ParticipantId;
 import com.smalaca.opentrainingsales.domain.training.Training;
 import com.smalaca.opentrainingsales.domain.training.TrainingRepository;
 import com.smalaca.opentrainingsales.domain.trainingid.TrainingId;
+import com.smalaca.opentrainingsales.domain.trainingoffer.TrainingOffer;
+import com.smalaca.opentrainingsales.domain.trainingoffer.TrainingOfferRepository;
 import com.smalaca.opentrainingsales.domain.trainingregistration.TrainingRegistrationDomainService;
 import jakarta.transaction.Transactional;
 
@@ -15,11 +17,13 @@ import java.util.UUID;
 public class BasketApplicationService {
     private final BasketRepository basketRepository;
     private final TrainingRepository trainingRepository;
+    private final TrainingOfferRepository trainingOfferRepository;
     private final TrainingRegistrationDomainService trainingRegistrationDomainService;
 
-    public BasketApplicationService(BasketRepository basketRepository, TrainingRepository trainingRepository, TrainingRegistrationDomainService trainingRegistrationDomainService) {
+    public BasketApplicationService(BasketRepository basketRepository, TrainingRepository trainingRepository, TrainingOfferRepository trainingOfferRepository, TrainingRegistrationDomainService trainingRegistrationDomainService) {
         this.basketRepository = basketRepository;
         this.trainingRepository = trainingRepository;
+        this.trainingOfferRepository = trainingOfferRepository;
         this.trainingRegistrationDomainService = trainingRegistrationDomainService;
     }
 
@@ -49,9 +53,10 @@ public class BasketApplicationService {
         Basket basket = basketRepository.findBy(new BasketId(basketId));
         Training training = trainingRepository.findBy(new TrainingId(trainingId));
 
-        trainingRegistrationDomainService.registerFor(basket, training, participantIdVO);
+        TrainingOffer trainingOffer = trainingRegistrationDomainService.registerFor(basket, training, participantIdVO);
 
         basketRepository.save(basket);
         trainingRepository.save(training);
+        trainingOfferRepository.save(trainingOffer);
     }
 }
