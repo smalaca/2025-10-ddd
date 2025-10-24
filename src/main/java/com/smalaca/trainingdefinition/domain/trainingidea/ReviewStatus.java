@@ -1,7 +1,6 @@
 package com.smalaca.trainingdefinition.domain.trainingidea;
 
-import java.util.UUID;
-
 // value object
-public record TrainingIdeaId(UUID trainingIdeaId) {
+enum ReviewStatus {
+    ACCEPTED, REJECTED
 }

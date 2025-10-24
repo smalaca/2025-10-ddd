@@ -5,4 +5,6 @@ import java.util.UUID;
 // Repository
 public interface TrainingIdeaRepository {
     UUID save(TrainingIdea trainerIdea);
+
+    TrainingIdea findBy(TrainingIdeaId trainingIdeaId);
 }
