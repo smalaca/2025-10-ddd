@@ -8,11 +8,11 @@ public class TrainingDraft {
 
     public void update(Price price, int trainingDays) {
         if (trainingDays < 1) {
-            throw new IllegalArgumentException("Training days must be greater than one.");
+            throw TrainingDraftException.notEnoughDays(trainingDraftId, trainingDays);
         }
 
         if (trainingDays > 5) {
-            throw new IllegalArgumentException("Training cannot be longer than working week.");
+            throw TrainingDraftException.tooManyDays(trainingDraftId, trainingDays);
         }
 
         this.price = price;
