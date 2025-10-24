@@ -1,6 +1,5 @@
 package com.smalaca.trainingdefinition.domain.trainingidea;
 
-import java.util.Random;
 import java.util.UUID;
 
 // value object
@@ -13,6 +12,6 @@ class TrainingIdeaNumber {
 
     // factory
     static TrainingIdeaNumber from(TrainerId trainerId) {
-        return new TrainingIdeaNumber(trainerId.trainerId() + UUID.randomUUID().toString());
+        return new TrainingIdeaNumber(trainerId.trainerId() + "/" + UUID.randomUUID());
     }
 }

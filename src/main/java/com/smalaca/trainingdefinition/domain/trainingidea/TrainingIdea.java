@@ -1,7 +1,10 @@
 package com.smalaca.trainingdefinition.domain.trainingidea;
 
+import java.util.UUID;
+
 // Aggregate Root - Entity
 public class TrainingIdea {
+    private TrainingIdeaId trainingIdeaId;
     private final TrainingIdeaNumber trainingIdeaNumber;
 
     private TrainingIdea(TrainingIdeaNumber trainingIdeaNumber) {
