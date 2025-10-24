@@ -9,6 +9,7 @@ import com.smalaca.opentrainingsales.domain.training.TrainingCode;
 import com.smalaca.opentrainingsales.domain.training.TrainingDefinitionId;
 import com.smalaca.opentrainingsales.domain.training.TrainingFactory;
 import com.smalaca.opentrainingsales.domain.training.TrainingRepository;
+import jakarta.transaction.Transactional;
 
 import java.util.UUID;
 
@@ -21,6 +22,7 @@ public class TrainingApplicationService {
         this.trainingFactory = trainingFactory;
     }
 
+    @Transactional
     public UUID addTraining(AddNewTrainingCommand command) {
         TrainingDefinitionId trainingDefinitionId = new TrainingDefinitionId(command.trainingDefinitionId());
         TrainerId trainerId = new TrainerId(command.trainerId());

@@ -14,4 +14,12 @@ public class Basket {
     public void add(TrainingId trainingId) {
         trainingIds.add(trainingId);
     }
+
+    public void remove(TrainingId trainingId) {
+        if (!trainingIds.contains(trainingId)) {
+            throw new IllegalArgumentException("TrainingId: " + trainingId.trainingId() + " not found in basket: " + basketId.basketId());
+        }
+
+        trainingIds.remove(trainingId);
+    }
 }

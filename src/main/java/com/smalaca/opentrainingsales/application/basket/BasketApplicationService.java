@@ -24,4 +24,14 @@ public class BasketApplicationService {
 
         basketRepository.save(basket);
     }
+
+    @Transactional
+    public void removeTraining(UUID basketId, UUID trainingId) {
+        Basket basket = basketRepository.findBy(new BasketId(basketId));
+        TrainingId trainingIdVO = new TrainingId(trainingId);
+
+        basket.remove(trainingIdVO);
+
+        basketRepository.save(basket);
+    }
 }
