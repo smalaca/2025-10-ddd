@@ -1,5 +1,7 @@
 package com.smalaca.opentrainingsales.domain.training;
 
+import com.smalaca.opentrainingsales.domain.trainingid.TrainingId;
+
 // aggregate root
 public class Training {
     private TrainingId trainingId;
