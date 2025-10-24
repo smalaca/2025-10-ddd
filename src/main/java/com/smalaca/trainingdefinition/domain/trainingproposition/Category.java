@@ -1,4 +1,4 @@
-package com.smalaca.trainingdefinition.domain.trainingidea;
+package com.smalaca.trainingdefinition.domain.trainingproposition;
 
 // value object
 public class Category {

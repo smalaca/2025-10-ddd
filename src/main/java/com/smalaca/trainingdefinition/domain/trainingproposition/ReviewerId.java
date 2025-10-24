@@ -1,4 +1,4 @@
-package com.smalaca.trainingdefinition.domain.trainingidea;
+package com.smalaca.trainingdefinition.domain.trainingproposition;
 
 import java.util.UUID;
 

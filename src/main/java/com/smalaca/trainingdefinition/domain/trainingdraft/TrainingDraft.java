@@ -1,12 +1,12 @@
 package com.smalaca.trainingdefinition.domain.trainingdraft;
 
-import com.smalaca.trainingdefinition.domain.trainingidea.Category;
-import com.smalaca.trainingdefinition.domain.trainingidea.TrainerId;
-import com.smalaca.trainingdefinition.domain.trainingidea.TrainingIdeaId;
+import com.smalaca.trainingdefinition.domain.trainingproposition.Category;
+import com.smalaca.trainingdefinition.domain.trainingproposition.TrainerId;
+import com.smalaca.trainingdefinition.domain.trainingproposition.TrainingPropositionId;
 
 // aggregate root
 public class TrainingDraft {
-    private final TrainingIdeaId trainingIdeaId;
+    private final TrainingPropositionId trainingPropositionId;
     private final String name;
     private final String description;
     private final Category category;
@@ -15,8 +15,8 @@ public class TrainingDraft {
     private Price price;
     private int trainingDays;
 
-    private TrainingDraft(TrainingIdeaId trainingIdeaId, String name, String description, Category category, TrainerId trainerId) {
-        this.trainingIdeaId = trainingIdeaId;
+    private TrainingDraft(TrainingPropositionId trainingPropositionId, String name, String description, Category category, TrainerId trainerId) {
+        this.trainingPropositionId = trainingPropositionId;
         this.name = name;
         this.description = description;
         this.category = category;
@@ -24,9 +24,9 @@ public class TrainingDraft {
     }
 
     // factory
-    public static TrainingDraft create(TrainingIdeaId trainingIdeaId, String name, String description, Category category, TrainerId trainerId) {
+    public static TrainingDraft create(TrainingPropositionId trainingPropositionId, String name, String description, Category category, TrainerId trainerId) {
         // generate TrainingDraftCode
-        return new TrainingDraft(trainingIdeaId, name, description, category, trainerId);
+        return new TrainingDraft(trainingPropositionId, name, description, category, trainerId);
     }
 
     public void update(Price price, int trainingDays) {
