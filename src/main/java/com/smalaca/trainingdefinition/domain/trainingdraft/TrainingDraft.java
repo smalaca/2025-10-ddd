@@ -2,6 +2,7 @@ package com.smalaca.trainingdefinition.domain.trainingdraft;
 
 // aggregate root
 public class TrainingDraft {
+    private TrainingDraftId trainingDraftId;
     private Price price;
     private int trainingDays;
 
