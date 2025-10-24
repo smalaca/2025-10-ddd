@@ -1,5 +1,6 @@
 package com.smalaca.opentrainingsales.application.training;
 
+import com.smalaca.opentrainingsales.domain.training.AddNewTrainingDomainCommand;
 import com.smalaca.opentrainingsales.domain.training.Period;
 import com.smalaca.opentrainingsales.domain.training.Training;
 import com.smalaca.opentrainingsales.domain.training.TrainingCode;
@@ -20,8 +21,9 @@ public class TrainingApplicationService {
     public UUID addTraining(AddNewTrainingCommand command) {
         TrainingCode trainingCodeVO = new TrainingCode(command.trainingCode());
         Period period = new Period(command.startDate(), command.endDate());
+        AddNewTrainingDomainCommand domainCommand = new AddNewTrainingDomainCommand(trainingCodeVO, period);
 
-        Training training = trainingFactory.create(trainingCodeVO, period);
+        Training training = trainingFactory.create(domainCommand);
 
         return trainingRepository.save(training);
     }
