@@ -12,4 +12,8 @@ public class Training {
     void changeTo(GuardianId guardianId) {
         this.guardianId = guardianId;
     }
+
+    TrainingId getTrainingId() {
+        return trainingId;
+    }
 }

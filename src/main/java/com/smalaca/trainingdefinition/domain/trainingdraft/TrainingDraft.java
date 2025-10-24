@@ -44,5 +44,6 @@ public class TrainingDraft {
 
         this.price = price;
         this.trainingDays = trainingDays;
+//        return new TrainingDraftUpdateDomainEvent();
     }
 }
