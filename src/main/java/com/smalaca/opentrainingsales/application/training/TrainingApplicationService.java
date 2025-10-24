@@ -5,7 +5,6 @@ import com.smalaca.opentrainingsales.domain.training.Training;
 import com.smalaca.opentrainingsales.domain.training.TrainingCode;
 import com.smalaca.opentrainingsales.domain.training.TrainingRepository;
 
-import java.time.LocalDate;
 import java.util.UUID;
 
 public class TrainingApplicationService {
@@ -15,9 +14,9 @@ public class TrainingApplicationService {
         this.trainingRepository = trainingRepository;
     }
 
-    public UUID addTraining(String trainingCode, LocalDate startDate, LocalDate endDate) {
-        TrainingCode trainingCodeVO = new TrainingCode(trainingCode);
-        Period period = new Period(startDate, endDate);
+    public UUID addTraining(AddNewTrainingCommand command) {
+        TrainingCode trainingCodeVO = new TrainingCode(command.trainingCode());
+        Period period = new Period(command.startDate(), command.endDate());
 
         Training training = new Training(trainingCodeVO, period);
 
