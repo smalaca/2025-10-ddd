@@ -12,7 +12,7 @@ public class Price {
 
     public static Price from(BigDecimal price) {
         if (BigDecimal.ZERO.compareTo(price) >= 0) {
-            throw new IllegalArgumentException("Price must be greater than zero");
+            throw new PriceException(price);
         }
 
         return new Price(price);
